@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <assert.h>
+
 #define max(x, y) x > y ? x : y
 
 struct string
@@ -14,6 +15,26 @@ struct string
     size_t size;
     size_t pointer;
 };
+
+/*!
+Проводит полный анализ сжатия файла
+\param[in] file_name имя анализируемого файла
+*/
+void full_zip_analise(char *file_name);
+
+/*!
+Создает бинарную строку по пути файла
+\param[in] file_name имя файла
+\return бинарную строку
+*/
+char *create_bin_string(char *file_name);
+
+/*!
+Zip файл с помощью lre
+\param[out] zipped где хранить сжатый файл
+\param[in] file_name имя файла, который надо сжать
+*/
+void zip_file(string *zipped, char *file_name);
 
 /*!
 Проверяет, что char является буквой
@@ -41,7 +62,7 @@ void rle_printer(string *str);
 \param[in]  rle строка, кторая дешифруется
 \param[out] str место, куда запишется дешифрованная строка
 */
-void rle_decipher(string *rle, string *str);
+void rle_decipher(string *str, string *rle);
 
 /*!
 Делает rle сжатие строки
@@ -143,5 +164,11 @@ char *my_strdup(const char *str);
 */
 size_t my_getline(char **lineptr, size_t n, FILE *stream);
 
+/*!
+Сравниваем строки и указывает позиции, на которых они не равны
+\param[in] str1 первая сравниваемая строка
+\param[in] str2 вторая сравниваемая строка
+*/
+void string_compare(char *str1, char *str2);
 
 #endif

@@ -1,10 +1,18 @@
 #include "matrixes/matrix.h"
 #include <stdio.h>
 #include "strings/string.h"
-
+#include "file_work/file.h"
 int main()
 {
-    /*int mas1[5][4] =
+    string ans = {};
+    str_create(&ans, "");
+
+    full_zip_analise("pictures/cat2.jpg");
+
+    rle_printer(&ans);
+}
+
+/*int mas1[5][4] =
     {
     {1, 2, 2, 1},
     {3, 1, 5, 1},
@@ -62,11 +70,12 @@ int main()
 
     free(trig);*/
 
-    string ans = {};
+    /*string ans = {};
     str_create(&ans, "");
 
     string str1 = {};
     str_create(&str1, "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrggggaaaapppwwwwtttttssssllllsleleeeqoooo");
+
 
     printf("aboba");
     rle_cipher(&ans, &str1);
@@ -77,6 +86,4 @@ int main()
 
     rle_decipher(&ans, &str2);
 
-    zip_win(&ans, &str2, &str1);
-}
-
+    zip_win(&ans, &str2, &str1);*/
