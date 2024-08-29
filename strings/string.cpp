@@ -14,7 +14,7 @@ char *create_bin_string(char *file_name)
     char *string_bin = (char *) calloc(file_size + 6, sizeof(char));
     for(size_t i = 0; i < file_size; ++i)
     {
-        sprintf(string_bin + i * sizeof(char), "%x", number[i]);
+        sprintf(string_bin + i, "%x", number[i]);
     }
 
     free(number);
@@ -66,8 +66,8 @@ void full_zip_analise(char *file_name)
 
     string_compare((char *)deciphered.mas, string_bin);
 
-    free(ciphered.mas);
-    ciphered.mas = NULL;
+    free(zipped.mas);
+    zipped.mas = NULL;
 
     free(string_bin);
     string_bin = NULL;
@@ -205,7 +205,8 @@ void rle_cipher(string *vessel, string *str)
             ++right;
             ++similar;
 
-            str_push(vessel, (signed char) -similar);
+            if (similar > 1)
+                str_push(vessel, (signed char) -similar);
             str_push(vessel, str->mas[right - 1]);
 
             left = right;
@@ -223,10 +224,12 @@ void str_create(string *ans, const char *str)
 
     size_t str_size = my_strlen(str);
     ans->mas = (signed char *) calloc(str_size + 1, sizeof(signed char));
+
     for (size_t i = 0; i < str_size; ++i)
     {
         ans->mas[i] = str[i];
     }
+
     ans->capacity = str_size + 1;
     ans->size = str_size;
 }
@@ -268,6 +271,7 @@ size_t my_getline(char **lineptr, size_t n, FILE *stream)
         (*lineptr)[count_of_symbols - 1] = (char)file_c;
         file_c = fgetc(stream);
     }
+
     (*lineptr)[count_of_symbols] = '\0';
     return count_of_symbols;
 }
@@ -330,6 +334,7 @@ char *my_strchr(char *str, int symbol)
 size_t my_strlen(const char *str)
 {
     size_t str_size = 0;
+
     while (*str++ != '\0')
         str_size++;
 
@@ -339,6 +344,7 @@ size_t my_strlen(const char *str)
 char *my_strcpy(char *destination, const char *source)
 {
     char *start_destination = destination;
+
     while (*source != '\0')
     {
         *destination++ = *source++;

@@ -47,6 +47,7 @@ void romb_printer(int *romb, size_t diametr)
 {
     size_t indent = (diametr - 1) * 2;
     size_t print_amount = 1;
+
     const size_t half_diam = diametr / 2;
     size_t romb_pointer = 0;
 
@@ -58,13 +59,16 @@ void romb_printer(int *romb, size_t diametr)
         print_amount += 2;
         indent -= 2;
     }
+
     indent += 4;
     print_amount -= 4;
+
     for (size_t i = 0; i < half_diam; ++i)
     {
         for (size_t j = 0; j < indent; ++j) printf(" ");
         for (size_t j = 0; j < print_amount; ++j) printf("%d ", romb[romb_pointer++]);
         printf("\n");
+
         print_amount -= 2;
         indent += 2;
     }
@@ -101,6 +105,8 @@ void triangle_update(int *trig, size_t size, size_t row, size_t column, int new_
 
 int triangle_get(int *trig, size_t size, size_t row, size_t column)
 {
+    assert(trig != NULL);
+
     size_t input_place = triangle_pointer(size, row, column);
 
     return trig[input_place];
@@ -108,6 +114,8 @@ int triangle_get(int *trig, size_t size, size_t row, size_t column)
 
 void matrix_override(int **data, size_t rows, size_t columns, int new_value)
 {
+    assert(data != NULL);
+
     for (size_t i = 0; i < rows; ++i)
     {
         for (size_t j = 0; j < columns; ++j)
@@ -135,6 +143,8 @@ int **matrix_rand(size_t rows, size_t columns)
 
 void matrix_printer(int **data, size_t rows, size_t columns)
 {
+    assert(data != NULL);
+
     for(size_t i = 0; i < rows; ++i)
     {
         for(size_t j = 0; j < columns; ++j)
@@ -149,6 +159,8 @@ void matrix_printer(int **data, size_t rows, size_t columns)
 
 int **matrix_sum(int **A, int **B, size_t rows_A, size_t columns_A, size_t rows_B, size_t columns_B)
 {
+    assert(A != NULL);
+    assert(B != NULL);
     assert(rows_A == rows_B);
     assert(columns_A == columns_B);
 
@@ -168,6 +180,8 @@ int **matrix_sum(int **A, int **B, size_t rows_A, size_t columns_A, size_t rows_
 
 int **matrix_element_prov(int **A, int **B, size_t rows_A, size_t columns_A, size_t rows_B, size_t columns_B)
 {
+    assert(A != NULL);
+    assert(B != NULL);
     assert(rows_A == rows_B);
     assert(columns_A == columns_B);
 
@@ -187,6 +201,8 @@ int **matrix_element_prov(int **A, int **B, size_t rows_A, size_t columns_A, siz
 
 int **matrix_multiply(int **A, int **B, size_t rows_A, size_t columns_A, size_t rows_B, size_t columns_B)
 {
+    assert(A != NULL);
+    assert(B != NULL);
     assert(columns_A == rows_B);
 
     int **ans = (int ** ) calloc(rows_A * columns_B * sizeof(int) + columns_B * sizeof(int), sizeof(int));
